@@ -7,7 +7,7 @@ const { Category, Product } = require('../../models');
 router.get('/', async (req, res) => {
   try {
     const categoriesData = await Category.findAll({
-      include: [{model: Product}]
+      include: [{ model: Product }]
     });
 
     if (!categoriesData) {
@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
       return;
     };
 
-    res.status(500).json(categoriesData);
+    res.status(200).json(categoriesData);
 
   }catch (err) {
     res.status(500).json(err);
@@ -26,10 +26,10 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const categoryById = await Category.findByPk(req.params.id, {
-      include: [{model: Product }]
+      include: [{ model: Product }]
     });
 
-    if(!categoryById) {
+    if (!categoryById) {
       res.status(200).json({message: 'No categories found'});
       return;
     };
@@ -67,7 +67,7 @@ router.put('/:id', async (req, res) => {
         id: req.params.id
       }
     });
-
+    // sends a message if user requests to update ID that does not exist
     const categoryById = await Category.findByPk(req.params.id, {
       include: [{ model: Product }]
     });
@@ -79,6 +79,7 @@ router.put('/:id', async (req, res) => {
 
     res.status(200).json(updateCategory);
     console.log("Category updated!");
+    
   } catch (err) {
     res.status(500).json(err);
   };
