@@ -17,12 +17,12 @@ router.get('/', async (req, res) => {
 
     res.status(200).json(categoriesData);
 
-  }catch (err) {
+  } catch (err) {
     res.status(500).json(err);
   };
 });
 
-// find one category by its `id` value,include its associated Products
+// find one category by its `id` value, include its associated Products
 router.get('/:id', async (req, res) => {
   try {
     const categoryById = await Category.findByPk(req.params.id, {
@@ -56,7 +56,7 @@ router.post('/', async (req, res) => {
   };
 });
 
- // update a category by its `id` value
+// update a category by its `id` value
 router.put('/:id', async (req, res) => {
   try {
     const updateCategory = await Category.update({
@@ -85,7 +85,7 @@ router.put('/:id', async (req, res) => {
   };
 });
 
-  // delete a category by its `id` value
+// delete a category by its `id` value
 router.delete('/:id', async (req, res) => {
   try {
     const deleteCategory = await Category.destroy(
@@ -100,7 +100,7 @@ router.delete('/:id', async (req, res) => {
         return;
       };
 
-      res. status(200).json(deleteCategory);
+      res.status(200).json(deleteCategory);
       console.log('Category deleted!');
 
   } catch (err) {

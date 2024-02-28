@@ -3,13 +3,13 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // The `/api/products` endpoint
 
-// find all products,include its associated Category and Tag data
+// find all products, include its associated Category and Tag data
 router.get('/', async (req, res) => {
   try {
     const productData = await Product.findAll({
-      include: [{ model: Category}, { model: Tag }],
+      include: [{ model: Category }, { model: Tag }],
     });
-    if(!productData) {
+    if (!productData) {
       res.status(200).json({message: 'No products found'});
       return;
     }
@@ -81,12 +81,12 @@ router.put('/:id', (req, res) => {
   })
     .then((product) => {
       // find all associated tags from ProductTag
-      return ProductTag.findAll({ where: {product_id: req.params.id }});
+      return ProductTag.findAll({ where: { product_id: req.params.id }});
     })
     .then((productTags) => {
       // get list of current tag_ids
       const productTagIds = productTags.map(({ tag_id }) => tag_id);
-      //create filtered list of new tag_ids
+      // create filtered list of new tag_ids
       const newProductTags = req.body.tagIds
         .filter((tag_id) => !productTagIds.includes(tag_id))
         .map((tag_id) => {
