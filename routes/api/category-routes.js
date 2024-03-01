@@ -67,7 +67,7 @@ router.put('/:id', async (req, res) => {
         id: req.params.id
       }
     });
-    // sends a message if user requests to update ID that does not exist
+    // sends message if user requests to update ID that does not exist
     const categoryById = await Category.findByPk(req.params.id, {
       include: [{ model: Product }]
     });
