@@ -11,4 +11,4 @@ When I "Get" information from the Tag, i'm given a function of everything inside
 https://dakotak92.github.io/Challenge-13-E-commerce-Back-End/
 
 ## Video Walkthrough
-(insert video here)
+[Challenge 13 Video.webm](https://github.com/DakotaK92/Challenge-13-E-commerce-Back-End/assets/46942706/a9736ecb-6672-439c-941f-c7d81c0f5ac3)
