@@ -15,13 +15,13 @@ router.get('/', async (req, res) => {
     }
 
     res.json(productData);
-    
+
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// find a single product by its `id`, include its associated Category and Tag data'
+// find a single product by its `id`, include its associated Category and Tag data
 router.get('/:id', async (req, res) => {
   try {
     const productById = await Product.findByPk(req.params.id, {
@@ -31,10 +31,10 @@ router.get('/:id', async (req, res) => {
       res.status(200).json({message: 'No products found'});
       return;
     }
-    
+
     res.status(200).json(productById);
 
-  } catch (err) { 
+  } catch (err) {
     res.status(500).json(err);
   }
 });
@@ -81,7 +81,7 @@ router.put('/:id', (req, res) => {
   })
     .then((product) => {
       // find all associated tags from ProductTag
-      return ProductTag.findAll({ where: { product_id: req.params.id }});
+      return ProductTag.findAll({ where: { product_id: req.params.id } });
     })
     .then((productTags) => {
       // get list of current tag_ids
@@ -102,15 +102,15 @@ router.put('/:id', (req, res) => {
 
       // run both actions
       return Promise.all([
-        ProductTag.destroy({ where: { id: productTagsToRemove }}),
+        ProductTag.destroy({ where: { id: productTagsToRemove } }),
         ProductTag.bulkCreate(newProductTags),
       ]);
     })
-    then((updatedProductTags) => res.json(updatedProductTags))
+    .then((updatedProductTags) => res.json(updatedProductTags))
     .catch((err) => {
-
+      // console.log(err);
       res.status(400).json(err);
-   })
+    });
 });
 
 // delete one product by its `id` value
@@ -128,7 +128,7 @@ router.delete('/:id', async (req, res) => {
 
     res.status(200).json(deleteProduct);
     console.log("Product deleted!");
-
+    
   } catch (err) {
     res.status(500).json(err);
   }
